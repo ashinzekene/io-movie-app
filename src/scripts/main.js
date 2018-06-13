@@ -15,7 +15,7 @@ function reload() {
 }
 
 function getRating(rating) {
-  let no = Number(rating.toFixed(0));
+  let no = Number((rating / 2).toFixed(0));
   return Array(no)
     .fill('')
     .reduce((prev, curr) => prev + '❤', '');
@@ -23,10 +23,14 @@ function getRating(rating) {
 
 const renderMovie = movie =>
   `<div class="movie">
-  <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" class="movie-img"></img>
+  <img height="auto" src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
+    alt="${movie.title}" class="movie-img"></img>
   <div class="movie-container">
     <div class="movie-title">${movie.title}</div>
-    <div class="movie-subtitle">${getRating(movie.vote_average)}</div>
+    <div class="movie-subtitle">
+      <span class="rating">Ratings:</span>
+       ${getRating(movie.vote_average)}
+      </div>
   </div>
 </div>`;
 
