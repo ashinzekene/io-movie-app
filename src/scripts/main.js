@@ -73,3 +73,17 @@ function hideLoader() {
 function showLoader() {
   document.querySelector('.loader').style.display = 'initial';
 }
+
+/**
+ *
+ * SERVICE WORKER REGISTRATION
+ */
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', e => {
+    const reg = window.navigator.serviceWorker.register('/sws.js');
+    console.log('service worker registered');
+  });
+} else {
+  console.log('No service worker here');
+}
