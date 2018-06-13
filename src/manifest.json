@@ -1,0 +1,8 @@
+{
+  "name": "IO Extended Movie App",
+  "short_name": "Movie App",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#181111",
+  "theme_color": "#da200f"
+}

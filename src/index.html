@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="get movie information">
+  <title>Movie PWA</title>
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
+
+  <!-- TODO add manifest here -->
+  <link rel="manifest" href="./manifest.json">
+  <!-- Add to home screen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="The Movie PWA">
+  <link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
+  <meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#2F3BA2">
+</head>
+
+<body>
+
+  <header class="header">
+    <h1 class="header__title">The Movie PWA</h1>
+    <button id="butRefresh" class="headerButton" aria-label="Refresh"></button>
+  </header>
+
+  <main class="main">
+    <div class="hero">
+      <div class="app-title">Welcome to the movies app</div>
+      <div class="app-subtitle">...get exciting movie info here...</div>
+    </div>
+    <div class="movies-container">
+    </div>
+    <div class="loader">
+      <svg viewBox="0 0 32 32" width="32" height="32">
+        <circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
+      </svg>
+    </div>
+  </main>
+  <!-- 
+  <div class="dialog-container">
+    <div class="dialog">
+      <div class="dialog-title">Add new city</div>
+      <div class="dialog-body">
+        <select id="selectCityToAdd">
+          Values map to Yahoo Weather API Where On Earth Identifiers (WOEIDs).
+               https://developer.yahoo.com/weather/documentation.html#req
+          <option value="2357536">Austin, TX</option>
+          <option value="2367105">Boston, MA</option>
+          <option value="2379574">Chicago, IL</option>
+          <option value="2459115">New York, NY</option>
+          <option value="2475687">Portland, OR</option>
+          <option value="2487956">San Francisco, CA</option>
+          <option value="2490383">Seattle, WA</option>
+        </select>
+      </div>
+      <div class="dialog-buttons">
+        <button id="butAddCity" class="button">Add</button>
+        <button id="butAddCancel" class="button">Cancel</button>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- Uncomment the line below when ready to test with fake data -->
+  <script src="scripts/test-data.js" async></script>
+  <script src="scripts/main.js" async></script>
+
+</body>
+
+</html>
