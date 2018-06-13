@@ -285,6 +285,11 @@ body {
   font-weight: 300;
 }
 
+.footer {
+  padding: 16px;
+  text-align: center;
+}
+
 .mdl-button {
   background: transparent;
   border: none;

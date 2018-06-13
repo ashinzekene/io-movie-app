@@ -23,7 +23,7 @@ function getRating(rating) {
 
 const renderMovie = movie =>
   `<div class="movie">
-  <img src="./images/ekene.jpg" alt="${movie.title}" class="movie-img"></img>
+  <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" class="movie-img"></img>
   <div class="movie-container">
     <div class="movie-title">${movie.title}</div>
     <div class="movie-subtitle">${getRating(movie.vote_average)}</div>
@@ -43,11 +43,21 @@ function insertIntoDom(sel, str, pos = 'beforeend') {
 
 const insertMovie = movie => insertIntoDom('.movies-container', movie);
 
-function fetchMovies() {
-  setTimeout(() => {
-    testData.map(renderMovie).forEach(insertMovie);
-    hideLoader();
-  }, 1500);
+async function fetchMovies() {
+  try {
+    const res = await fetch('https://movie-ease.herokuapp.com/api/movies/latest/1').then(res => res.json());
+    JSON.parse(res)
+      .results.map(renderMovie)
+      .forEach(insertMovie);
+  } catch (err) {
+    const error = `
+    <div style="text-align: center; padding: 40px 0px;">
+      A network error occurred, Are you online?
+    </div>
+    `;
+    insertIntoDom('.movies-container', error);
+  }
+  hideLoader();
 }
 
 fetchMovies();
