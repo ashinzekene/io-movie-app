@@ -144,6 +144,16 @@ body {
   outline: none;
   cursor: pointer;
 }
+.header #backButton {
+  background: none;
+  color: white;
+  height: unset;
+  padding: 3px 10px;
+  font-weight: 900;
+  margin-top: -20px;
+  font-size: 40px;
+  text-indent: 0;
+}
 .header #butRefresh {
   background: url(../images/ic_refresh_white_24px.svg) center center no-repeat;
 }
@@ -314,6 +324,34 @@ a {
   background-color: #ec2210;
 }
 
+/**********************************\
+|*********** MOVIE PAGE ************|
+\***********************************/
+
+.a-movie {
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.a-movie .movie-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  background-image: url('../images/ekene.jpg');
+  width: 100%;
+}
+.a-movie .movie-details {
+  flex: 1;
+}
+@media only screen and (min-width: 600px) {
+  .a-movie .movie-image {
+    width: 400px;
+  }
+}
 @-webkit-keyframes pop {
   from {
     width: 10px;

@@ -1,34 +1,47 @@
 'use strict';
 
-// const refreshButton = document.querySelector('#butRefresh');
 const state = {
   movies: [],
   page: 1
 };
 
+if (location.href.search('index.html') > -1 || location.href.search(/src\/$/) > -1) {
+  fetchMovies();
+} else if (location.href.search(/movie.html#\d+/) > -1) {
+  const movie = localStorage.getItem('currentMovie');
+  localStorage.removeItem('currentMovie');
+  if (movie) {
+    renderSingleMovie(JSON.parse(movie));
+  }
+  const movieId = location.hash.substr(1);
+  // fetch(`https://movie-ease.herokuapp.com/api/movies/one/${movieId}`)
+  //   .then(res => res.json())
+  //   .then(console.log);
+}
 window.addEventListener('online', e => console.log('App is now online', e));
 window.addEventListener('offline', e => console.log('App is now offline', e));
-// window.addEventListener('hashchange', routePage);
-window.onpopstate = function(event) {
-  alert('location: ' + document.location + ', state: ' + JSON.stringify(event.state));
-};
-window.onhashchange = routePage;
 document.addEventListener('pointerup', e => {
-  if (e.target.matches('#butRefresh')) {
+  const tar = e.target;
+  if (tar.matches('#butRefresh')) {
     state.page = 1;
     reload(e);
-  } else if (e.target.matches('#load-more-button')) {
+  } else if (tar.matches('.movie, .movie > *')) {
+    console.log('kjsdkjdfjkjjk');
+    const movieDetails = state.movies[tar.dataset.id];
+    localStorage.setItem('currentMovie', JSON.stringify(movieDetails));
+    open(`movie.html#${tar.dataset.movieId}`, '_self');
+  } else if (tar.matches('#load-more-button')) {
     state.page++;
     (async () => {
-      e.target.textContent = 'Loading...';
+      tar.textContent = 'Loading...';
       await fetchMovies();
-      e.target.textContent = 'Load More';
+      tar.textContent = 'Load More';
     })();
   }
 });
 
 const renderMovie = ({ id, poster_path, title, vote_average }, i) =>
-  `<a href="movie.html#${id}" data-id='${i}' data-movie-id='${id}' class='movie'>
+  `<div data-id='${i}' data-movie-id='${id}' class='movie'>
     <img height='auto' data-id='${i}' data-movie-id='${id}' src='https://image.tmdb.org/t/p/w500${poster_path}'
       alt='${title}' class='movie-img'></img>
     <div class='movie-container'>
@@ -38,7 +51,7 @@ const renderMovie = ({ id, poster_path, title, vote_average }, i) =>
         ${getRating(vote_average)}
         </div>
     </div>
-  </>`;
+  </div>`;
 
 /**
  * Inserts HTML String into an element at a given selector
@@ -54,6 +67,7 @@ function insertIntoDom(sel, str, pos = 'beforeend') {
 const insertMovie = movie => insertIntoDom('.movies-container', movie);
 
 async function fetchMovies() {
+  hide('#load-more-button');
   try {
     const res = await fetch('https://movie-ease.herokuapp.com/api/movies/latest/' + state.page).then(res => res.json());
     JSON.parse(res)
@@ -63,6 +77,7 @@ async function fetchMovies() {
       })
       .map(renderMovie)
       .forEach(insertMovie);
+    show('#load-more-button');
   } catch (err) {
     console.log(err);
     const error = `
@@ -75,14 +90,21 @@ async function fetchMovies() {
   hide('.loader');
 }
 
-fetchMovies();
+function renderSingleMovie(movie) {
+  const q = document.querySelector.bind(document);
+  q('h1.header__title').textContent = movie.title;
+  q('.movie-image').style.backgroundImage = movie.poster_path;
+  q('.movie-image').textContent = movie.release_date;
+  q('.movie-details').textContent = movie.overview;
+  // movie.vote_average
+}
 
 function hide(selector) {
-  document.querySelector(selector).style.display = 'none';
+  document.querySelector(selector) ? (document.querySelector(selector).style.display = 'none') : null;
 }
 
 function show(selector) {
-  document.querySelector(selector).style.display = 'initial';
+  document.querySelector(selector) ? (document.querySelector(selector).style.display = 'initial') : null;
 }
 
 function routePage() {
