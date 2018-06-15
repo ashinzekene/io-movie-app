@@ -14,9 +14,9 @@ if (location.href.search('index.html') > -1 || location.href.search(/src\/$/) > 
     renderSingleMovie(JSON.parse(movie));
   }
   const movieId = location.hash.substr(1);
-  // fetch(`https://movie-ease.herokuapp.com/api/movies/one/${movieId}`)
-  //   .then(res => res.json())
-  //   .then(console.log);
+  fetch(`https://movie-ease.herokuapp.com/api/movies/one/${movieId}`)
+    .then(res => res.json())
+    .then(console.log);
 }
 window.addEventListener('online', e => console.log('App is now online', e));
 window.addEventListener('offline', e => console.log('App is now offline', e));
@@ -141,11 +141,10 @@ function getRating(rating) {
  *
  */
 
-// if ('serviceWorker' in navigator) {
-//   window.addEventListener('load', e => {
-//     const reg = window.navigator.serviceWorker.register('/sws.js');
-//     console.log('service worker registered');
-//   });
-// } else {
-//   console.log('No service worker here');
-// }
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', e => {
+    const reg = window.navigator.serviceWorker.register('sw.js').then(() => console.log('service worker registered'));
+  });
+} else {
+  console.log('No service worker here');
+}

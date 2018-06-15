@@ -22,33 +22,23 @@
   <meta name="msapplication-TileColor" content="#2F3BA2">
 </head>
 
-<body id="movie-page">
+<body>
 
   <header class="header">
-    <button class="headerButton" onclick="history.back()" id="backButton" aria-label="Refresh">&#8249;</button>
     <h1 class="header__title">The Movie PWA</h1>
+    <button id="butRefresh" class="headerButton" aria-label="Refresh"></button>
   </header>
 
-  <main class="a-movie">
-    <div class="movie-image">
-
+  <main class="main">
+    <div class="hero">
+      <div class="app-title">Welcome to the movies app</div>
+      <!-- <div class="app-subtitle">...get exciting movie info here...</div> -->
     </div>
-    <div class="movie-details">
-      <div class="movie-title">Movie Title</div>
-      <div class="movie-release-date">Release Date:
-        <span>12th Jan 2015</span>
-      </div>
-      <div class="movie-overview">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi repellat eius delectus laboriosam, corrupti fugiat placeat.
-        Rem velit dolor dolorem illo, autem facere consequatur quam possimus voluptas fugit corporis dolorum.
-      </div>
+    <div class="movies-container">
+      <div style="text-align:center;">You are offline, Pls check your network</div>
     </div>
   </main>
-  <div style="display: none;" class="loader">
-    <svg viewBox="0 0 32 32" width="32" height="32">
-      <circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
-    </svg>
-  </div>
+
   <script src="scripts/main.js" async></script>
 
 </body>

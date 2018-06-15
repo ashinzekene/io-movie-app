@@ -161,6 +161,9 @@ body {
 .header__title {
   font-weight: 400;
   font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin: 0;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
@@ -328,8 +331,11 @@ a {
 |*********** MOVIE PAGE ************|
 \***********************************/
 
+#movie-page .header {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  box-shadow: unset;
+}
 .a-movie {
-  margin-top: 50px;
   display: flex;
   flex-wrap: wrap;
   height: 100vh;
@@ -344,12 +350,21 @@ a {
   background-image: url('../images/ekene.jpg');
   width: 100%;
 }
+
 .a-movie .movie-details {
   flex: 1;
+  padding: 10px;
+}
+
+.a-movie .movie-details .movie-title {
+  text-align: center;
+  font-weight: 200;
+  font-size: 22px;
+  padding: 10px;
 }
 @media only screen and (min-width: 600px) {
   .a-movie .movie-image {
-    width: 400px;
+    min-width: 400px;
   }
 }
 @-webkit-keyframes pop {
