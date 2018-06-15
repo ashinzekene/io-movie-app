@@ -14,10 +14,11 @@ if (location.href.search('index.html') > -1 || location.href.search(/src\/$/) > 
     renderSingleMovie(JSON.parse(movie));
   }
   const movieId = location.hash.substr(1);
-  fetch(`https://movie-ease.herokuapp.com/api/movies/one/${movieId}`)
+  fetch(`https://movie-ease.herokuapp.com/movies/one/${movieId}?short=yes`)
     .then(res => res.json())
-    .then(console.log);
+    .then(renderFullSingleMovie);
 }
+
 window.addEventListener('online', e => console.log('App is now online', e));
 window.addEventListener('offline', e => console.log('App is now offline', e));
 document.addEventListener('pointerup', e => {
@@ -46,9 +47,8 @@ const renderMovie = ({ id, poster_path, title, vote_average }, i) =>
       alt='${title}' class='movie-img'></img>
     <div class='movie-container'>
       <div class='movie-title'>${title}</div>
-      <div class='movie-subtitle'>
-        <span class='rating'>Ratings:</span>
-        ${getRating(vote_average)}
+      <div class='movie-rating'>
+        <span class='rating'>${getRating(vote_average)}</span>
         </div>
     </div>
   </div>`;
@@ -64,12 +64,14 @@ function insertIntoDom(sel, str, pos = 'beforeend') {
   elem && elem.insertAdjacentHTML(pos, str);
 }
 
-const insertMovie = movie => insertIntoDom('.movies-container', movie);
+const insertMovie = movie => insertIntoDom('.movies-list', movie);
 
 async function fetchMovies() {
   hide('#load-more-button');
   try {
-    const res = await fetch('https://movie-ease.herokuapp.com/api/movies/latest/' + state.page).then(res => res.json());
+    const res = await fetch('https://movie-ease.herokuapp.com/movies/latest/' + state.page).then(
+      res => res.json()
+    );
     JSON.parse(res)
       .results.map(movie => {
         state.movies.push(movie);
@@ -77,7 +79,7 @@ async function fetchMovies() {
       })
       .map(renderMovie)
       .forEach(insertMovie);
-    show('#load-more-button');
+    show('#load-more-button', 'inline-block');
   } catch (err) {
     console.log(err);
     const error = `
@@ -85,7 +87,7 @@ async function fetchMovies() {
       A network error occurred, Are you online?
     </div>
     `;
-    insertIntoDom('.movies-container', error);
+    insertIntoDom('.movies-list', error);
   }
   hide('.loader');
 }
@@ -93,46 +95,61 @@ async function fetchMovies() {
 function renderSingleMovie(movie) {
   const q = document.querySelector.bind(document);
   q('h1.header__title').textContent = movie.title;
-  q('.movie-image').style.backgroundImage = movie.poster_path;
-  q('.movie-image').textContent = movie.release_date;
-  q('.movie-details').textContent = movie.overview;
+  q('.movie-image').style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${
+    movie.poster_path
+  })`;
+  q('.movie-details .movie-title').textContent = movie.original_title;
+  q('.movie-details .movie-overview div:nth-last-of-type(2)').textContent = movie.overview;
   // movie.vote_average
 }
 
+function renderFullSingleMovie(movieStr) {
+  const q = document.querySelector.bind(document);
+  const movie = JSON.parse(movieStr);
+  q('h1.header__title').textContent = movie.title;
+  q('.movie-image').style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${
+    movie.poster_path
+  })`;
+  q('.movie-details .movie-title').textContent = movie.original_title;
+  q('.movie-details .movie-subtitle').textContent = movie.tagline;
+  q('.movie-details .movie-rating').innerHTML = getRating(movie.vote_average);
+  q('.movie-details .movie-genres').innerHTML = movie.genres.reduce(
+    (prev, curr) => prev + `<div>${curr.name}</div>`,
+    ''
+  );
+  q('.movie-details .movie-release-date span').textContent = new Date(
+    movie.release_date
+  ).toDateString();
+  q('.movie-details .movie-overview div:nth-last-of-type(2)').textContent = movie.overview;
+}
+
 function hide(selector) {
-  document.querySelector(selector) ? (document.querySelector(selector).style.display = 'none') : null;
+  document.querySelector(selector)
+    ? (document.querySelector(selector).style.display = 'none')
+    : null;
 }
 
-function show(selector) {
-  document.querySelector(selector) ? (document.querySelector(selector).style.display = 'initial') : null;
-}
-
-function routePage() {
-  if (!location.hash) {
-    console.log('Going home');
-  } else {
-    console.log(location.hash.replace('#/movie/', ''));
-  }
-}
-
-function changeHash(elem) {
-  const id = elem.dataset.id;
-  const movieId = elem.dataset.movieId;
-  history.pushState({}, id, `#movie/${movieId}`);
+function show(selector, display = 'inital') {
+  document.querySelector(selector)
+    ? (document.querySelector(selector).style.display = display)
+    : null;
 }
 
 function reload() {
   state.pageNo = 1;
-  document.querySelector('.movies-container').innerHTML = '';
+  document.querySelector('.movies-list').innerHTML = '';
   show('.loader');
   fetchMovies();
 }
 
+// Renders the ratings for each movie on the home page
 function getRating(rating) {
   let no = Number((rating / 2).toFixed(0));
-  return Array(no)
-    .fill('')
-    .reduce((prev, curr) => prev + '❤', '');
+  return (
+    Array(no)
+      .fill('')
+      .reduce((prev, curr) => prev + '&starf;', '') + ''.padEnd((5 - no) * 6, '&star;')
+  );
 }
 
 /**
@@ -141,10 +158,10 @@ function getRating(rating) {
  *
  */
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', e => {
-    const reg = window.navigator.serviceWorker.register('sw.js').then(() => console.log('service worker registered'));
-  });
-} else {
-  console.log('No service worker here');
-}
+// if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', e => {
+//     const reg = window.navigator.serviceWorker.register('sw.js').then(() => console.log('service worker registered'));
+//   });
+// } else {
+//   console.log('No service worker here');
+// }

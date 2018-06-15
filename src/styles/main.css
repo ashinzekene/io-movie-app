@@ -98,7 +98,8 @@ body {
   background: #da200f;
   position: fixed;
   font-size: 20px;
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 2px 9px 1px rgba(0, 0, 0, 0.12), 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 2px 9px 1px rgba(0, 0, 0, 0.12),
+    0 4px 2px -2px rgba(0, 0, 0, 0.2);
   padding: 16px 16px 0 16px;
   will-change: transform;
   display: -webkit-box;
@@ -213,7 +214,7 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-.movies-container {
+.movies-list {
   display: flex;
   flex-wrap: wrap;
   min-height: 200px;
@@ -256,9 +257,13 @@ a {
   font-weight: 300;
 }
 
-.movie .movie-container .rating {
-  font-size: 12px;
+.movie .movie-container .movie-rating {
+  font-size: 13px;
   font-weight: 200;
+}
+.movie .movie-container .movie-rating span {
+  color: red;
+  font-size: 20px;
 }
 
 .footer {
@@ -285,10 +290,10 @@ a {
   letter-spacing: 0;
   overflow: hidden;
   will-change: box-shadow;
-  -webkit-transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-    color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-    color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1),
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1),
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
   cursor: pointer;
   text-decoration: none;
@@ -344,10 +349,10 @@ a {
 
 .a-movie .movie-image {
   background-size: cover;
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
-  height: 100vh;
-  background-image: url('../images/ekene.jpg');
+  height: 90vh;
+  /* background-image: url('../images/ekene.jpg'); */
   width: 100%;
 }
 
@@ -359,14 +364,48 @@ a {
 .a-movie .movie-details .movie-title {
   text-align: center;
   font-weight: 200;
-  font-size: 22px;
+  font-size: 20px;
   padding: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-@media only screen and (min-width: 600px) {
+
+.a-movie .movie-details .movie-subtitle {
+  text-align: center;
+  font-style: italic;
+  font-weight: 13px;
+}
+
+.a-movie .movie-details .movie-rating {
+  font-size: 25px;
+  padding: 10px 0px;
+}
+.a-movie .movie-details .movie-genres {
+  padding: 10px 3px;
+}
+.a-movie .movie-details .movie-genres div {
+  border-radius: 20px;
+  display: inline-block;
+  margin: 2px 4px;
+  background: #444;
+  padding: 5px 10px;
+}
+
+.a-movie .movie-details .movie-release-date {
+  padding: 10px 0px;
+}
+
+.a-movie .movie-details .movie-overview div:nth-last-of-type(1) {
+  padding: 15px 0px;
+}
+
+@media only screen and (min-width: 768px) {
   .a-movie .movie-image {
     min-width: 400px;
   }
 }
+
 @-webkit-keyframes pop {
   from {
     width: 10px;
