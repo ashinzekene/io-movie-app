@@ -13,7 +13,11 @@
 
 ### - Manifest.json
 
-### - Meta theme-name
+### - Meta Theme Color
+
+```html
+<link name="theme-color" content="#989489"/>
+```
 
 ### - Resource Prioritization
 

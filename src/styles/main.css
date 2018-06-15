@@ -1,3 +1,43 @@
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  to {
+    -webkit-transform: rotate(450deg);
+    transform: rotate(450deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  to {
+    -webkit-transform: rotate(450deg);
+    transform: rotate(450deg);
+  }
+}
+
+@-webkit-keyframes line {
+  0% {
+    stroke-dasharray: 2, 85.964;
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  50% {
+    stroke-dasharray: 65.973, 21.9911;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 2, 85.964;
+    stroke-dashoffset: -65.973;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -14,6 +54,10 @@ body {
   color: rgb(218, 218, 218);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.hidden {
+  display: none;
 }
 
 html {
@@ -145,46 +189,6 @@ body {
   animation: line 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite, rotate 1.6s linear infinite;
 }
 
-@-webkit-keyframes rotate {
-  from {
-    -webkit-transform: rotate(0);
-    transform: rotate(0);
-  }
-  to {
-    -webkit-transform: rotate(450deg);
-    transform: rotate(450deg);
-  }
-}
-
-@keyframes rotate {
-  from {
-    -webkit-transform: rotate(0);
-    transform: rotate(0);
-  }
-  to {
-    -webkit-transform: rotate(450deg);
-    transform: rotate(450deg);
-  }
-}
-
-@-webkit-keyframes line {
-  0% {
-    stroke-dasharray: 2, 85.964;
-    -webkit-transform: rotate(0);
-    transform: rotate(0);
-  }
-  50% {
-    stroke-dasharray: 65.973, 21.9911;
-    stroke-dashoffset: 0;
-  }
-  100% {
-    stroke-dasharray: 2, 85.964;
-    stroke-dashoffset: -65.973;
-    -webkit-transform: rotate(90deg);
-    transform: rotate(90deg);
-  }
-}
-
 .main {
   padding-top: 60px;
   -webkit-box-flex: 1;
@@ -199,6 +203,7 @@ body {
 .movies-container {
   display: flex;
   flex-wrap: wrap;
+  min-height: 200px;
   justify-content: space-around;
 }
 
@@ -216,6 +221,11 @@ body {
   transition: 400ms all;
   box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.14), 0 3px 1px -2px rgba(255, 255, 255, 0.2),
     0 1px 5px 0 rgba(255, 255, 255, 0.12);
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
 
 .movie img {
