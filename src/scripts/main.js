@@ -5,20 +5,6 @@ const state = {
   page: 1
 };
 
-if (location.href.search('index.html') > -1 || location.href.search(/src\/$/) > -1) {
-  fetchMovies();
-} else if (location.href.search(/movie.html#\d+/) > -1) {
-  const movie = localStorage.getItem('currentMovie');
-  localStorage.removeItem('currentMovie');
-  if (movie) {
-    renderSingleMovie(JSON.parse(movie));
-  }
-  const movieId = location.hash.substr(1);
-  fetch(`https://movie-ease.herokuapp.com/movies/one/${movieId}?short=yes`)
-    .then(res => res.json())
-    .then(renderFullSingleMovie);
-}
-
 window.addEventListener('online', e => console.log('App is now online', e));
 window.addEventListener('offline', e => console.log('App is now offline', e));
 document.addEventListener('pointerup', e => {
@@ -55,9 +41,6 @@ const renderMovie = ({ id, poster_path, title, vote_average }, i) =>
 
 /**
  * Inserts HTML String into an element at a given selector
- * @param {String} sel Selector of HTMELement
- * @param {String} str HTMLString
- * @param {'beforebegin' | 'afterbegin' | 'beforeend' | 'afterend'} pos position in dom to insert string
  */
 function insertIntoDom(sel, str, pos = 'beforeend') {
   const elem = document.querySelector(sel);
@@ -158,10 +141,12 @@ function getRating(rating) {
  *
  */
 
-// if ('serviceWorker' in navigator) {
-//   window.addEventListener('load', e => {
-//     const reg = window.navigator.serviceWorker.register('sw.js').then(() => console.log('service worker registered'));
-//   });
-// } else {
-//   console.log('No service worker here');
-// }
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', e => {
+    const reg = window.navigator.serviceWorker
+      .register('sw.js')
+      .then(() => console.log('service worker registered'));
+  });
+} else {
+  console.log('No service worker here');
+}

@@ -13,10 +13,10 @@
   <link rel="manifest" href="./manifest.json">
   <!-- Add to home screen for Safari on iOS -->
   <link rel="preconnect" href="image.tmdb.org">
-  <meta name="theme-color" content="#ec2210;">
+  <meta name="theme-color" content="#da200f">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="The Movie PWA">
+  <meta name="apple-mobile-web-app-title" content="The Movie App">
   <link rel="apple-touch-icon" href="images/icons/mipmap-xxhdpi/ic_launcher.png">
   <meta name="msapplication-TileImage" content="images/icons/mipmap-xxhdpi/ic_launcher.png">
   <meta name="msapplication-TileColor" content="#2F3BA2">
@@ -25,7 +25,7 @@
 <body class="movies-page">
 
   <header class="header">
-    <h1 class="header__title">The Movie PWA</h1>
+    <h1 class="header__title">The Movie App</h1>
     <button id="butRefresh" class="headerButton" aria-label="Refresh"></button>
   </header>
 
@@ -46,8 +46,10 @@
     </div>
   </main>
 
-  <script src="scripts/main.js" async></script>
-
+  <script src="scripts/main.js"></script>
+  <script>
+    fetchMovies();
+  </script>
 </body>
 
 </html>
