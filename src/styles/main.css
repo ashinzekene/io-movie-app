@@ -152,9 +152,12 @@ body {
   padding: 3px 10px;
   font-weight: 900;
   margin-top: -20px;
+  text-indent: 0;
+  width: 40px;
   font-size: 40px;
-  text-indent: 0;10}
+}
 .header #butRefresh {
+  background: url(../images/ic_refresh_white_24px.svg) center center no-repeat;
 }
 
 .header__title {
@@ -362,9 +365,7 @@ a {
   text-align: center;
   font-weight: 200;
   font-size: 20px;
-  margin-top: -20px;
-  background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.9));
-  min-height: 20px; 
+  min-height: 20px;
   padding: 10px;
   white-space: nowrap;
   overflow: hidden;
