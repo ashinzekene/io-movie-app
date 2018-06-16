@@ -153,10 +153,8 @@ body {
   font-weight: 900;
   margin-top: -20px;
   font-size: 40px;
-  text-indent: 0;
-}
+  text-indent: 0;10}
 .header #butRefresh {
-  background: url(../images/ic_refresh_white_24px.svg) center center no-repeat;
 }
 
 .header__title {
@@ -351,8 +349,7 @@ a {
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
-  height: 90vh;
-  /* background-image: url('../images/ekene.jpg'); */
+  height: 100vh;
   width: 100%;
 }
 
@@ -365,6 +362,9 @@ a {
   text-align: center;
   font-weight: 200;
   font-size: 20px;
+  margin-top: -20px;
+  background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.9));
+  min-height: 20px; 
   padding: 10px;
   white-space: nowrap;
   overflow: hidden;
@@ -402,17 +402,13 @@ a {
 
 @media only screen and (min-width: 768px) {
   .a-movie .movie-image {
-    min-width: 400px;
+    width: 50%;
+    max-width: 500px;
   }
-}
-
-@-webkit-keyframes pop {
-  from {
-    width: 10px;
-    height: 20px;
+  .a-movie .movie-details {
+    margin-top: 30px;
   }
-  to {
-    width: initial;
-    height: initial;
+  .a-movie .movie-title {
+    margin-top: 0px;
   }
 }
