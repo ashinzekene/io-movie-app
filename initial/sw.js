@@ -11,7 +11,13 @@ const CACHE_FILES = [
 ];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(CACHE_FILES)));
+  e.waitUntil(
+    caches
+      .open(CACHE_NAME)
+      .then(function(cache) {
+        return cache.addAll(CACHE_FILES);
+      })
+      .then(() => self.skipWaiting())
+  );
 });
-
-self.addEventListener('fetch', e => {});
+// self.addEventListener('fetch', e => {});

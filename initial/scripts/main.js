@@ -14,7 +14,6 @@ document.addEventListener('pointerup', e => {
     state.page = 1;
     reload(e);
   } else if (tar.matches('.movie, .movie > *')) {
-    console.log('kjsdkjdfjkjjk');
     const movieDetails = state.movies[tar.dataset.id];
     localStorage.setItem('currentMovie', JSON.stringify(movieDetails));
     open(`movie.html#${tar.dataset.movieId}`, '_self');
@@ -80,7 +79,7 @@ function renderSingleMovie(movie) {
   q('h1.header__title').textContent = movie.title;
   q('.movie-image').style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${
     movie.poster_path
-  })`;
+    })`;
   q('.movie-details .movie-title').textContent = movie.original_title;
   q('.movie-details .movie-overview div:nth-last-of-type(2)').textContent = movie.overview;
   // movie.vote_average
@@ -92,7 +91,7 @@ function renderFullSingleMovie(movieStr) {
   q('h1.header__title').textContent = movie.title;
   q('.movie-image').style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${
     movie.poster_path
-  })`;
+    })`;
   q('.movie-details .movie-title').textContent = movie.original_title;
   q('.movie-details .movie-subtitle').textContent = movie.tagline;
   q('.movie-details .movie-rating').innerHTML = getRating(movie.vote_average);

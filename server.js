@@ -2,8 +2,8 @@ var app,
   server,
   express = require('express'),
   path = require('path'),
-  port = process.env.PORT || 3000,
-  root = path.resolve(__dirname, 'initial');
+  port = process.env.PORT || 5000,
+  root = path.resolve(__dirname, 'src');
 
 app = express();
 app.use(function(req, res, next) {
