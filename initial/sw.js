@@ -14,10 +14,31 @@ self.addEventListener('install', e => {
   e.waitUntil(
     caches
       .open(CACHE_NAME)
-      .then(function(cache) {
+      .then(function (cache) {
         return cache.addAll(CACHE_FILES);
       })
       .then(() => self.skipWaiting())
   );
 });
-// self.addEventListener('fetch', e => {});
+
+self.addEventListener('fetch', e => {
+  e.respondWith(
+    caches.match(e.request).then(
+      res =>
+        res ||
+        fetch(e.request)
+          .then(response => {
+            return response;
+          })
+          .catch(err => {
+            console.log('An error occrred while fetching file', e.request.url, err);
+            if (e.request.url.search('movie.html') > -1) {
+              return caches.open(CACHE_NAME).then(cache => {
+                return cache.match('/offline.html');
+              });
+            }
+            return err;
+          })
+    )
+  );
+});

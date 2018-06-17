@@ -6,7 +6,7 @@ var app,
   root = path.resolve(__dirname, 'src');
 
 app = express();
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   console.log(req.url);
   next();
 });
