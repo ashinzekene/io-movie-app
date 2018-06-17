@@ -1,13 +1,13 @@
 const CACHE_NAME = 'cache_one';
 const CACHE_FILES = [
-  '/',
-  '/index.html',
-  '/offline.html',
-  '/images/ic_refresh_white_24px.svg',
-  '/images/no-wifi.png',
-  '/images/calendar.jpg',
-  '/styles/main.css',
-  '/scripts/main.js',
+  '/io-movie-app/',
+  '/io-movie-app/index.html',
+  '/io-movie-app/offline.html',
+  '/io-movie-app/images/ic_refresh_white_24px.svg',
+  '/io-movie-app/images/no-wifi.png',
+  '/io-movie-app/images/calendar.jpg',
+  '/io-movie-app/styles/main.css',
+  '/io-movie-app/scripts/main.js',
   'https://movie-ease.herokuapp.com/movies/latest/1'
 ];
 
@@ -15,7 +15,7 @@ self.addEventListener('install', e => {
   e.waitUntil(
     caches
       .open(CACHE_NAME)
-      .then(function(cache) {
+      .then(function (cache) {
         return cache.addAll(CACHE_FILES);
       })
       .then(() => self.skipWaiting())
