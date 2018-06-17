@@ -5,7 +5,7 @@
 The project has three folders,
 - initial - This is the initial state of the app. No PWA capabilities 
 - final - Thisis thefinal state of the app with PWA capabilities
-- src - Just there, the same thing as the `final` folder 
+- docs - Live preview 
 
 To start, run `npm run start`, to develop run `npm run dev`. You need [express](https://expressjs.com) and [nodemon](https://www.npmjs.com/package/nodemon).
 

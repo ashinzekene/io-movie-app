@@ -157,7 +157,7 @@ body {
   font-size: 40px;
 }
 .header #butRefresh {
-  background: url(../images/ic_refresh_white_24px.svg) center center no-repeat;
+  background: url(/io-movie-app/images/ic_refresh_white_24px.svg) center center no-repeat;
 }
 
 .header__title {

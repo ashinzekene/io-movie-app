@@ -36,7 +36,7 @@
       "type": "image/png"
     }
   ],
-  "scope": "/",
+  "scope": "/io-movie-app",
   "display": "standalone",
   "background_color": "#181111",
   "theme_color": "#da200f"
